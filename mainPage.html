@@ -2,8 +2,46 @@
 <html>
 <head>
     <title>Main page</title>
+    <link rel="icon" type="image/jpeg" href="../webdeb_public/logo2.jpg">
+    <style>
+        .button-column {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            gap: 0px;
+            margin-top: 20px;
+        }
+
+        .button-column button {
+            width: 150px;
+            height: 30px;
+            font-size: 15px;
+        }
+
+        body {
+            background-image: url("../webdeb_public/logo2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center -85px;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="button-column">
+
+        <button onclick="window.location.href='userAccountPage.html'">
+            Account
+        </button>
+
+        <button onclick="window.location.href='accountInformationPage.html'">
+            Account information
+        </button>
+
+        <button onclick="window.location.href='filePage.html'">
+            Files
+        </button>
+
+    </div>
 </body>
 </html>
