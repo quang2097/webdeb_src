@@ -1,37 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin user account manager</title>
+    <title>User account page</title>
+
     <link rel="icon" type="image/jpeg" href="../webdeb_public/logo2.jpg">
+
     <style>
+
+        body {
+
+            background-image: url("../webdeb_public/logo2.jpg");
+
+            background-size: 250px 250px;
+
+            background-repeat: no-repeat;
+
+            background-position: top left;
+
+            background-attachment: fixed;
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 40px;
+        }
+
         .button-column {
+
             display: flex;
             flex-direction: column;
-            align-items: left;
-            gap: 0px;
-            margin-top: 20px;
+
+            gap: 10px;
+
+            width: 180px;
         }
 
         .button-column button {
-            width: 150px;
-            height: 30px;
+
+            width: 170px;
+            height: 35px;
+
             font-size: 15px;
+
+            border-radius: 8px;
+            border: none;
+
+            cursor: pointer;
         }
 
-        body {
-            background-image: url("../webdeb_public/admin_icon.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center -200px;
+        .account-info {
+
+            min-width: 250px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            background-color: rgba(255, 255, 255, 0.85);
+
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
         }
+
+        .account-info h3 {
+
+            margin-top: 0;
+        }
+
     </style>
 </head>
 
 <body>
+
+    <div class="container">
+
     <div class="button-column">
+
         <button onclick="window.location.href='userAccountCreationForm.html'">
             Create account
         </button>
+
+        <button id="loginButton"
+                onclick="handleLoginButton()">
+            Login
+        </button>
+
+        <button id="logoutButton"
+                onclick="logoutUser()"
+                style="display: none;">
+            Log out
+        </button>
+
     </div>
+
+    <div class="account-info">
+
+            <h3>Account Status</h3>
+
+            <p id="loginState">
+                Not logged in yet
+            </p>
+
+            <p id="accountDetails">
+                No account information available
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        // Change this value depending on login state
+        let loggedIn = false;
+
+        function updateUI() {
+
+            const loginButton =
+                document.getElementById("loginButton");
+
+            const logoutButton =
+                document.getElementById("logoutButton");
+
+            const loginState =
+                document.getElementById("loginState");
+
+            const accountDetails =
+                document.getElementById("accountDetails");
+
+            if (loggedIn) {
+
+                loginButton.innerText =
+                    "Already logged in";
+
+                logoutButton.style.display =
+                    "block";
+
+                loginState.innerText =
+                    "Logged in";
+
+                accountDetails.innerText =
+                    "Account information loaded";
+            }
+
+            else {
+
+                loginButton.innerText =
+                    "Login";
+
+                logoutButton.style.display =
+                    "none";
+
+                loginState.innerText =
+                    "Not logged in yet";
+
+                accountDetails.innerText =
+                    "No account information available";
+            }
+        }
+
+        function handleLoginButton() {
+
+            if (!loggedIn) {
+
+                window.location.href =
+                    "userAccountLoginForm.html";
+            }
+        }
+
+        function logoutUser() {
+
+            loggedIn = false;
+
+            updateUI();
+        }
+
+        updateUI();
+
+    </script>
+
 </body>
 </html>
