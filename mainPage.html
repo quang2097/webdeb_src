@@ -254,6 +254,32 @@
 
 <body>
 
+    <!-- LOGIN STATUS -->
+
+    <div id="loginStatusBox"
+        style="
+            position: fixed;
+            top: 20px;
+            left: 220px;
+
+            background-color: rgba(255,255,255,0.92);
+
+            padding: 10px 15px;
+
+            border-radius: 10px;
+
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+
+            font-size: 15px;
+        ">
+
+        Status:
+        <span id="loginStatusText">
+            Not logged in
+        </span>
+
+    </div>
+
     <!-- POPUPS -->
 
     <div id="errorPopup" class="popup"></div>
@@ -263,19 +289,19 @@
 
     <div class="button-column">
 
-        <button onclick="window.location.href='userAccountPage.html'">
-            Account
-        </button>
+    <button onclick="window.location.href='userAccountPage.html'">
+        Account
+    </button>
 
-        <button onclick="window.location.href='filePage.html'">
-            Files
-        </button>
+    <button onclick="goToProtectedPage('filePage.html')">
+        Files
+    </button>
 
-        <button onclick="tryUpload()">
-            Upload file
-        </button>
+    <button onclick="goToProtectedPage('fileUploadForm.html')">
+        Upload file
+    </button>
 
-    </div>
+</div>
 
     <!-- AI CHAT -->
 
@@ -324,6 +350,26 @@
     <script>
 
         /* POPUPS */
+        function goToProtectedPage(page) {
+
+            if(!loggedIn) {
+
+                const shouldLogin =
+                    confirm(
+                        "You must be logged in to access this page.\n\nGo to login page?"
+                    );
+
+                if(shouldLogin) {
+
+                    window.location.href =
+                        "userAccountLoginForm.html";
+                }
+
+                return;
+            }
+
+            window.location.href = page;
+        }
 
         function showError(message) {
 
