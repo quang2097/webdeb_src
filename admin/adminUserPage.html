@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User manager</title>
+    <title>User Manager</title>
+
     <link rel="icon" type="image/jpeg" href="../../webdeb_public/admin_icon.jpg">
 
     <style>
@@ -10,10 +11,293 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center -200px;
+
+            margin: 0;
+            padding: 30px;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+
+            margin: auto;
+
+            background-color: rgba(255, 255, 255, 0.95);
+
+            border-radius: 10px;
+
+            padding: 25px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .section {
+            margin-bottom: 30px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #ccc;
+        }
+
+        label {
+            display: block;
+
+            margin-top: 10px;
+
+            margin-bottom: 5px;
+
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 10px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #ccc;
+
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+
+            padding: 10px 15px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .create-btn {
+            background-color: #28a745;
+        }
+
+        .password-btn {
+            background-color: #007BFF;
+        }
+
+        .lock-btn {
+            background-color: #dc3545;
+        }
+
+        .unlock-btn {
+            background-color: #fd7e14;
+        }
+
+        .user-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .user-card {
+            background: white;
+
+            border: 1px solid #ccc;
+
+            border-radius: 5px;
+
+            padding: 12px;
         }
     </style>
 </head>
 
 <body>
+
+    <div class="container">
+
+        <h1>User Manager</h1>
+
+        <!-- Create User -->
+
+        <div class="section">
+
+            <h2>Create User</h2>
+
+            <form action="/create-user" method="POST">
+
+                <label for="createUsername">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="createUsername"
+                    name="username"
+                    required
+                >
+
+                <label for="createPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="createPassword"
+                    name="password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="create-btn"
+                >
+                    Create User
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Change Password -->
+
+        <div class="section">
+
+            <h2>Change User Password</h2>
+
+            <form action="/change-user-password" method="POST">
+
+                <label for="passwordUsername">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="passwordUsername"
+                    name="username"
+                    required
+                >
+
+                <label for="newPassword">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="password-btn"
+                >
+                    Change Password
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Lock User -->
+
+        <div class="section">
+
+            <h2>Lock User Account</h2>
+
+            <form action="/lock-user" method="POST">
+
+                <label for="lockUsername">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="lockUsername"
+                    name="username"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="lock-btn"
+                >
+                    Lock Account
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Unlock User -->
+
+        <div class="section">
+
+            <h2>Unlock User Account</h2>
+
+            <form action="/unlock-user" method="POST">
+
+                <label for="unlockUsername">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="unlockUsername"
+                    name="username"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="unlock-btn"
+                >
+                    Unlock Account
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- User List -->
+
+        <div class="section">
+
+            <h2>Users</h2>
+
+            <div id="userList" class="user-list">
+                <!-- User entries added here -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function addUser(username, status) {
+
+            const userList =
+                document.getElementById("userList");
+
+            const card =
+                document.createElement("div");
+
+            card.className = "user-card";
+
+            card.innerHTML = `
+                <strong>${username}</strong>
+                <br>
+                Status: ${status}
+            `;
+
+            userList.appendChild(card);
+        }
+
+        // FastAPI can later populate this list dynamically
+
+    </script>
+
 </body>
 </html>

@@ -1,19 +1,233 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin reports manager</title>
+    <title>Admin Reports Manager</title>
+
     <link rel="icon" type="image/jpeg" href="../../webdeb_public/admin_icon.jpg">
-    
+
     <style>
         body {
             background-image: url("../webdeb_public/admin_icon.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center -200px;
+
+            margin: 0;
+            padding: 30px;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+
+            margin: auto;
+
+            background-color: rgba(255,255,255,0.95);
+
+            border-radius: 10px;
+
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .report-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .report-card {
+            background: white;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            padding: 15px;
+        }
+
+        .report-card h3 {
+            margin-top: 0;
+        }
+
+        .report-info {
+            margin-bottom: 10px;
+        }
+
+        .report-info p {
+            margin: 5px 0;
+        }
+
+        .actions {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .actions button {
+            border: none;
+
+            border-radius: 5px;
+
+            padding: 10px 15px;
+
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .view-btn {
+            background-color: #007BFF;
+        }
+
+        .resolve-btn {
+            background-color: #28a745;
+        }
+
+        .dismiss-btn {
+            background-color: #6c757d;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+        }
+
+        .status {
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
+
+    <div class="container">
+
+        <h1>Reports Manager</h1>
+
+        <div id="reportList" class="report-list">
+
+            <!-- Reports will be added here -->
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function addReport(
+            reportId,
+            fileTitle,
+            category,
+            description,
+            reporter,
+            status
+        ) {
+            const reportList =
+                document.getElementById("reportList");
+
+            const card =
+                document.createElement("div");
+
+            card.className = "report-card";
+
+            card.innerHTML = `
+                <h3>Report #${reportId}</h3>
+
+                <div class="report-info">
+
+                    <p><strong>File:</strong> ${fileTitle}</p>
+
+                    <p><strong>Category:</strong> ${category}</p>
+
+                    <p><strong>Reporter:</strong> ${reporter}</p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="status">
+                            ${status}
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong><br>
+                        ${description}
+                    </p>
+
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="view-btn"
+                        onclick="viewFile('${reportId}')"
+                    >
+                        View File
+                    </button>
+
+                    <button
+                        class="resolve-btn"
+                        onclick="resolveReport('${reportId}')"
+                    >
+                        Mark Resolved
+                    </button>
+
+                    <button
+                        class="dismiss-btn"
+                        onclick="dismissReport('${reportId}')"
+                    >
+                        Dismiss
+                    </button>
+
+                    <button
+                        class="remove-btn"
+                        onclick="removeFile('${reportId}')"
+                    >
+                        Remove File
+                    </button>
+
+                </div>
+            `;
+
+            reportList.appendChild(card);
+        }
+
+        function viewFile(reportId) {
+            console.log(
+                "View file for report:",
+                reportId
+            );
+        }
+
+        function resolveReport(reportId) {
+            console.log(
+                "Resolve report:",
+                reportId
+            );
+        }
+
+        function dismissReport(reportId) {
+            console.log(
+                "Dismiss report:",
+                reportId
+            );
+        }
+
+        function removeFile(reportId) {
+            console.log(
+                "Remove file for report:",
+                reportId
+            );
+        }
+
+    </script>
+
 </body>
 </html>

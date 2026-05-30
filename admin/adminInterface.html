@@ -23,14 +23,26 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center -200px;
+
+            margin: 0;
+            padding: 30px;
+
+            font-family: Arial, sans-serif;
         }
+
     </style>
 </head>
 
 <body>
     <div class="button-column">
+<body>
+    <div class="button-column">
 
-        <button onclick="window.location.href='adminManagerPage.html'">
+        <button
+            id="adminManagerButton"
+            onclick="window.location.href='adminManagerPage.html'"
+            style="display: none;"
+        >
             Admin manager
         </button>
 
@@ -45,6 +57,24 @@
         <button onclick="window.location.href='reportsPage.html'">
             Reports manager
         </button>
+
     </div>
+
+    <script>
+        /*
+            Replace this with data from your login system.
+
+            "tier1" = normal admin
+            "tier2" = upper-tier admin
+        */
+
+        const adminTier = localStorage.getItem("adminTier");
+
+        if (adminTier === "tier2") {
+            document.getElementById(
+                "adminManagerButton"
+            ).style.display = "block";
+        }
+    </script>
 </body>
 </html>

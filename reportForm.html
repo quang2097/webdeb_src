@@ -1,18 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Report form</title>
+    <title>Report Form</title>
+
     <link rel="icon" type="image/jpeg" href="../webdeb_public/logo2.jpg">
+
     <style>
         body {
             background-image: url("../webdeb_public/logo2.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center -85px;
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+        .report-container {
+            width: 500px;
+
+            background-color: rgba(255, 255, 255, 0.95);
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .report-container h1 {
+            margin-top: 0;
+
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 10px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 5px;
+
+            box-sizing: border-box;
+
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            background-color: #dc3545;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #b02a37;
         }
     </style>
 </head>
 
 <body>
+
+    <div class="report-container">
+
+        <h1>Report Content</h1>
+
+        <form action="#" method="POST">
+
+            <div class="form-group">
+                <label for="bookTitle">Book Title</label>
+
+                <input
+                    type="text"
+                    id="bookTitle"
+                    name="bookTitle"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="reportType">Report Category</label>
+
+                <select
+                    id="reportType"
+                    name="reportType"
+                    required
+                >
+                    <option value="">Select a category</option>
+
+                    <option value="inappropriate-topic">
+                        Inappropriate Topic
+                    </option>
+
+                    <option value="wrong-author-publisher">
+                        Wrong Author/Publisher
+                    </option>
+
+                    <option value="wrong-genre">
+                        Wrong Genre
+                    </option>
+
+                    <option value="copyright-issues">
+                        Copyright Issues
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="details">
+                    Additional Details
+                </label>
+
+                <textarea
+                    id="details"
+                    name="details"
+                    placeholder="Describe the issue..."
+                    required
+                ></textarea>
+            </div>
+
+            <button
+                type="submit"
+                class="submit-button"
+            >
+                Submit Report
+            </button>
+
+        </form>
+
+    </div>
+
 </body>
 </html>

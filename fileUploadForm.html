@@ -161,6 +161,7 @@
                     id="fileInput"
                     name="uploadedFile"
                     class="file-input"
+                    accept=".pdf,application/pdf"
                 >
 
                 <div class="file-name" id="fileName">
@@ -182,9 +183,23 @@
         const fileInput = document.getElementById("fileInput");
         const fileName = document.getElementById("fileName");
 
+        function isPdf(file) {
+            return file.type === "application/pdf" ||
+                file.name.toLowerCase().endsWith(".pdf");
+        }
+
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0) {
-                fileName.textContent = fileInput.files[0].name;
+                const file = fileInput.files[0];
+
+                if (!isPdf(file)) {
+                    alert("Only PDF files are allowed.");
+                    fileInput.value = "";
+                    fileName.textContent = "No file selected";
+                    return;
+                }
+
+                fileName.textContent = file.name;
             }
         });
 
@@ -203,10 +218,15 @@
             dropZone.classList.remove("dragover");
 
             if (event.dataTransfer.files.length > 0) {
-                fileInput.files = event.dataTransfer.files;
+                const file = event.dataTransfer.files[0];
 
-                fileName.textContent =
-                    event.dataTransfer.files[0].name;
+                if (!isPdf(file)) {
+                    alert("Only PDF files are allowed.");
+                    return;
+                }
+
+                fileInput.files = event.dataTransfer.files;
+                fileName.textContent = file.name;
             }
         });
     </script>
