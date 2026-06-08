@@ -1,0 +1,142 @@
+/* Align the avatar and logout button horizontally */
+.app-header .logged-in-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Style for a simple circular avatar */
+.app-header .avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #61dafb; /* A nice bright color */
+  color: #282c34;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+
+.app-header .avatar:hover {
+  transform: scale(1.05);
+}
+
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #282c34;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.app-header .logo {
+  cursor: pointer;
+}
+
+.app-header .logo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.app-header .nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.app-header .nav-links a {
+  color: #cfd8dc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.app-header .nav-links a:hover,
+.app-header .nav-links a.active-link {
+  color: #ffffff;
+}
+
+.app-header .user-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.app-header .user-actions button.btn-login {
+  background-color: #007bff;
+  color: white;
+}
+
+.app-header .user-actions button.btn-logout {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* --- Bắt đầu phần Dropdown CSS --- */
+
+/* Thiết lập tọa độ gốc cho menu thả xuống */
+.app-header .avatar-container {
+  position: relative;
+}
+
+/* Giao diện của khung Dropdown */
+.app-header .dropdown-menu {
+  position: absolute;
+  top: 55px; /* Đẩy menu xuống dưới avatar */
+  right: 0;  /* Căn mép phải của menu bằng mép phải của avatar */
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  overflow: hidden;
+  z-index: 1000; /* Đảm bảo menu đè lên các thành phần khác */
+}
+
+/* Định dạng các mục bên trong menu (cả link và button) */
+.app-header .dropdown-menu a,
+.app-header .dropdown-menu button.dropdown-item {
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #333333;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Hiệu ứng khi hover vào mục trong menu */
+.app-header .dropdown-menu a:hover,
+.app-header .dropdown-menu button.dropdown-item:hover {
+  background-color: #f1f3f5;
+  color: #000000;
+}
+
+/* Đường kẻ ngang ngăn cách nút Đăng xuất */
+.app-header .dropdown-menu hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Màu đỏ nổi bật cho nút đăng xuất */
+.app-header .dropdown-menu button.text-danger {
+  color: #dc3545;
+  font-weight: 600;
+}
+.app-header .dropdown-menu button.text-danger:hover {
+  background-color: #ffe6e6;
+}
