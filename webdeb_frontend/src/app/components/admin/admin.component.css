@@ -1,0 +1,94 @@
+.table-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.id-column {
+  font-family: monospace;
+  font-size: 0.85em;
+  color: #666;
+}
+
+/* Badge styling for roles */
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: white;
+}
+
+.admin-badge {
+  background-color: #6200ea; /* Purple for admins */
+}
+
+.user-badge {
+  background-color: #03dac6; /* Teal for regular users */
+  color: #000;
+}
+
+/* Status colors */
+.text-danger { color: #d32f2f; font-weight: bold; }
+.text-success { color: #2e7d32; font-weight: bold; }
+.error-message { color: #d32f2f; margin-bottom: 15px; }
+
+/* Add this to your existing CSS */
+.btn-delete {
+  background-color: #f44336; /* Red color */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Add this to your existing CSS */
+.btn-toggle-lock {
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 8px; /* Adds space between this and the Delete button */
+  transition: background-color 0.2s;
+}
+
+.btn-lock {
+  background-color: #ff9800; /* Orange to warn that it's a restricting action */
+}
+
+.btn-lock:hover {
+  background-color: #f57c00;
+}
+
+.btn-unlock {
+  background-color: #4caf50; /* Green to indicate restoring access */
+}
+
+.btn-unlock:hover {
+  background-color: #388e3c;
+}

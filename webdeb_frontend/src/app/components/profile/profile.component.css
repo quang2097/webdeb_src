@@ -1,0 +1,115 @@
+/* Container to center the card on the page */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Adjust based on your header height */
+  background-color: #f4f7f6;
+  padding: 2rem;
+}
+
+/* Status messages (Loading / Error) */
+.status-message {
+  font-size: 1.2rem;
+  color: #555;
+}
+.status-message.error {
+  color: #dc3545;
+}
+
+/* The Profile Card */
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Header section containing Avatar, Name, and Role */
+.profile-header {
+  padding: 2rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-large {
+  width: 80px;
+  height: 80px;
+  background-color: #61dafb;
+  color: #282c34;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.profile-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.role-badge {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Divider line */
+.divider {
+  border: 0;
+  border-top: 1px solid #e9ecef;
+  margin: 0;
+}
+
+/* Body section containing specific data */
+.profile-body {
+  padding: 1.5rem 2rem;
+  text-align: left;
+}
+
+.info-group {
+  margin-bottom: 1.5rem;
+}
+
+.info-group:last-child {
+  margin-bottom: 0;
+}
+
+.info-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.info-group p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.monospace-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem !important;
+  color: #555 !important;
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  word-break: break-all;
+}

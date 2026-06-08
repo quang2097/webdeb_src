@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div class="novel-container">
+  <h2>Novel </h2>
+
+  <div *ngIf="errorMessage" class="error-alert">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="novelData && !isLoading" class="results-card">
+    <div class="header">
+      <img *ngIf="novelData.novel_coverurl" src="{{apiUrl}}{{novelData.novel_coverurl}}" alt="Cover" class="cover-image" />
+      <div class="title-info">
+        <h3>{{ novelData.novel_title || 'Untitled Novel' }}</h3>
+        <p class="author">by {{ novelData.novel_author || 'Unknown' }}</p>
+      </div>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-item"><strong>Series:</strong> {{ novelData.novel_series }}</div>
+      <div class="detail-item"><strong>Views:</strong> {{ novelData.novel_views }}</div>
+      <div class="detail-item"><strong>Downloads:</strong> {{ novelData.novel_downloads }}</div>
+      <div class="detail-item"><strong>Private:</strong> {{ novelData.novel_isprivate ? 'Yes' : 'No' }}</div>
+      <div class="detail-item"><strong>Last Updated:</strong> {{ novelData.novel_updatedat | date:'medium' }}</div>
+    </div>
+
+    <p class="description"><strong>Description:</strong><br/> {{ novelData.novel_description }}</p>
+
+    <div class="document-card" *ngIf="novelData.document">
+      <h4>Associated Document</h4>
+      <p><strong>Title:</strong> {{ novelData.document.doc_title }}</p>
+      <p><strong>Status:</strong> {{ novelData.document.doc_status }}</p>
+      <p *ngIf="novelData.document.doc_error" class="error-text"><strong>Error Log:</strong> {{ novelData.document.doc_error }}</p>
+
+      <div class="links">
+        <a *ngIf="novelData.document.doc_fileurl" href="{{apiUrl}}{{novelData.document.doc_fileurl}}" target="_blank">View File</a>
+        <a *ngIf="novelData.document.doc_markdownurl" href="{{apiUrl}}{{novelData.document.doc_markdownurl}}" target="_blank">View Markdown</a>
+      </div>
+    </div>
+  </div>
+</div>
