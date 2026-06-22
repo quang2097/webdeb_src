@@ -1,0 +1,178 @@
+/* ==========================================
+   1. CORE LAYOUT (Đồng bộ với Home & Admin)
+   ========================================== */
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  background-color: #f9f9f9; /* Nền sáng đồng bộ hệ thống */
+  padding: 2rem;
+  font-family: 'Roboto Condensed', sans-serif, system-ui; /* Font chữ hệ thống */
+}
+
+/* Status messages */
+.status-message {
+  font-size: 1.2rem;
+  color: #666666;
+  text-align: center;
+  padding: 20px;
+}
+.status-message.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+}
+
+/* ==========================================
+   2. PROFILE CARD STYLING
+   ========================================== */
+.profile-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Đổ bóng mềm mại giống thẻ Novel */
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Header section */
+.profile-header {
+  padding: 2rem 2rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-large {
+  width: 85px;
+  height: 85px;
+  /* Dùng gradient màu cam làm điểm nhấn */
+  background: linear-gradient(135deg, #ffb74d, #ff9800);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+}
+
+.profile-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #111111;
+  font-size: 1.6rem;
+}
+
+/* Role Badges (Đồng bộ từ Admin page) */
+.role-badge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.admin-badge {
+  background-color: #ede7f6;
+  color: #512da8;
+  border: 1px solid #d1c4e9;
+}
+
+.user-badge {
+  background-color: #e0f2f1;
+  color: #00897b;
+  border: 1px solid #b2dfdb;
+}
+
+/* ==========================================
+   3. BODY & CONTENT
+   ========================================== */
+.divider {
+  border: 0;
+  border-top: 1px solid #eeeeee;
+  margin: 0;
+}
+
+.profile-body {
+  padding: 1.5rem 2rem;
+  text-align: left;
+}
+
+.info-group {
+  margin-bottom: 1.25rem;
+}
+
+.info-group:last-child {
+  margin-bottom: 0;
+}
+
+.info-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #888888;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-group p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #333333;
+}
+
+.monospace-text {
+  font-family: monospace;
+  font-size: 0.9rem !important;
+  color: #666666 !important;
+  background-color: #f5f5f5;
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  word-break: break-all;
+}
+
+/* ==========================================
+   4. FOOTER & BUTTON ACTION
+   ========================================== */
+.profile-footer {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.btn-update {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff9800; /* Điểm nhấn màu cam */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-update:hover {
+  background-color: #e65100;
+  color: #ffffff;
+}
+
+.btn-update:active {
+  transform: scale(0.98);
+}

@@ -1,0 +1,101 @@
+<app-header></app-header>
+<div class="page-container">
+  <div class="form-card">
+    <h2>Update Novel Info</h2>
+
+    <div class="form-group">
+      <label>
+        Cover Image
+        <span *ngIf="!existingCoverUrl && !selectedCover" class="required">*</span>
+      </label>
+      <div class="file-input-wrapper">
+        <input type="file" id="coverUpload" accept="image/*" (change)="onFileSelected($event)" [disabled]="isSubmitting">
+        <label for="coverUpload" class="file-label">
+          <span *ngIf="!selectedCover">Choose a cover image...</span>
+          <span *ngIf="selectedCover" class="file-name">
+            {{ selectedCover.name }}
+            <span class="remove-cover-btn" (click)="removeCover($event)" title="Xóa ảnh">✕</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Novel Title <span *ngIf="!novelTitle || novelTitle.trim() === ''" class="required">*</span></label>
+      <input type="text" [(ngModel)]="novelTitle" placeholder="Enter title" [disabled]="isSubmitting">
+    </div>
+
+    <div class="form-group">
+      <label>Author <span *ngIf="!novelAuthor || novelAuthor.trim() === ''" class="required">*</span></label>
+      <input type="text" [(ngModel)]="novelAuthor" placeholder="Enter author name" [disabled]="isSubmitting">
+    </div>
+
+    <div class="form-group">
+      <label>Series (Optional)</label>
+      <input type="text" [(ngModel)]="novelSeries" placeholder="Enter series name" [disabled]="isSubmitting">
+    </div>
+
+    <div class="form-group">
+      <label>Description (Optional)</label>
+      <textarea [(ngModel)]="novelDescription" rows="4" placeholder="Enter a brief summary..." [disabled]="isSubmitting"></textarea>
+    </div>
+
+    <div class="form-group" *ngIf="needs_image_upload">
+      <label>Additional Image (Optional)</label>
+      <div class="file-input-wrapper">
+        <input type="file" id="additionalUpload" accept="image/*" (change)="onAdditionalFileSelected($event)" [disabled]="isSubmitting">
+        <label for="additionalUpload" class="file-label">
+          <span *ngIf="!selectedImg">Choose an additional image...</span>
+          <span *ngIf="selectedImg" class="file-name">
+            {{ selectedImg.name }}
+            <span class="remove-cover-btn" (click)="removeAdditionalImage($event)" title="Xóa ảnh">✕</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+<!--    tags-->
+    <div class="form-group" >
+      <label>Tags (Optional)</label>
+
+    <div class="dropdown-container">
+      <button (click)="toggleDropdown()" class="dropdown-btn">
+        Select Frameworks ({{ selectedTags.length }})
+        <span class="arrow" [class.open]="isDropdownOpen">▼</span>
+      </button>
+
+      <div class="dropdown-list" *ngIf="isDropdownOpen">
+        <div *ngFor="let item of listTag" class="dropdown-item">
+          <label>
+            <input
+              type="checkbox"
+              [checked]="item.checked"
+              (change)="onCheckboxChange(item, $event)"
+            >
+            {{ item.tag_name }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+      <div class="tags-container">
+    <span class="tag" *ngFor="let item of selectedTagsName">
+      {{ item }}
+      <span class="remove-btn" (click)="removeTag(item)">✕</span>
+    </span>
+      </div>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <input type="checkbox" id="isPrivate" [(ngModel)]="isPrivate" [disabled]="isSubmitting">
+      <label for="isPrivate">Make this novel private</label>
+    </div>
+
+    <button class="btn-submit" (click)="onSubmit()" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Updating...' : 'Save Information' }}
+    </button>
+
+    <div class="status success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="status error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+</div>

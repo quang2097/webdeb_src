@@ -1,0 +1,243 @@
+/* ==========================================
+   1. CORE LAYOUT
+   ========================================== */
+.my-doc-container {
+  background-color: #f9f9f9;
+  color: #333333;
+  padding: 24px;
+  min-height: 100vh;
+  font-family: 'Roboto Condensed', sans-serif, system-ui;
+}
+
+.content-header {
+  margin-bottom: 20px;
+}
+
+.content-header.mt-40 {
+  margin-top: 40px; /* Tạo khoảng cách giữa 2 bảng */
+}
+
+.content-header h2 {
+  color: #111111;
+  font-size: 1.6rem;
+  border-bottom: 2px solid #ff9800;
+  padding-bottom: 8px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-heading {
+  font-size: 1.4rem;
+}
+
+/* ==========================================
+   2. TABLE STYLING
+   ========================================== */
+.table-wrapper {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333333;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background-color: #fafafa;
+}
+
+.id-column {
+  font-family: monospace;
+  font-size: 0.9em;
+  color: #888888;
+}
+
+.truncate-text {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   3. BADGES & STATUS INDICATORS
+   ========================================== */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.badge-private { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+.badge-public { background-color: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
+.badge-warning { background-color: #fff8e1; color: #f57f17; border: 1px solid #ffecb3; }
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-active { background-color: #e8f5e9; color: #2e7d32; }
+.status-pending { background-color: #fff3e0; color: #e65100; }
+
+/* ==========================================
+   4. ACTION BUTTONS (Dùng Flexbox đồng bộ)
+   ========================================== */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-decoration: none; /* Quan trọng cho thẻ <a> giả làm button */
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-view {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border-color: #bbdefb;
+}
+.btn-view:hover { background-color: #bbdefb; }
+
+.btn-update {
+  background-color: #fff3e0;
+  color: #e65100;
+  border-color: #ffe0b2;
+}
+.btn-update:hover { background-color: #ffe0b2; }
+
+.btn-delete {
+  background-color: #ffebee;
+  color: #c62828;
+  border-color: #ffcdd2;
+}
+.btn-delete:hover { background-color: #ffcdd2; }
+
+/* ==========================================
+   5. PAGINATION & UTILITIES
+   ========================================== */
+.pagination-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.pag-btn {
+  background-color: #f0f0f0;
+  color: #333333;
+  border: 1px solid #cccccc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pag-btn:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+.pag-btn:disabled {
+  background-color: #f5f5f5;
+  color: #b0b0b0;
+  border-color: #dddddd;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-size: 0.95rem;
+  color: #666666;
+}
+
+.go-to-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666666;
+}
+
+.page-input {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  color: #333333;
+  padding: 6px;
+  width: 60px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.go-btn {
+  background: #f0f0f0;
+  color: #333333;
+  border: 1px solid #cccccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.go-btn:hover {
+  background: #e0e0e0;
+}
+
+.loading-message, .empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #777777;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #ffcdd2;
+}

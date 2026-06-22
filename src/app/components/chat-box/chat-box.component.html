@@ -1,0 +1,41 @@
+<div class="chat-wrapper">
+  <div class="chat-header">
+    <h3>Support Chat</h3>
+  </div>
+
+  <div class="chat-messages" #chatContainer>
+    <div
+      *ngFor="let msg of messages"
+      [ngClass]="{'msg-user': msg.sender === 'user', 'msg-bot': msg.sender === 'bot'}"
+      class="message-row">
+
+      <div class="message-bubble">
+        <div class="msg-text">{{ msg.text }}</div>
+        <div *ngIf="msg.linkUrl" [routerLink]="msg.linkUrl" class="chat-link">
+                  {{ msg.linkText }}
+        </div>
+        <div class="msg-time">{{ msg.timestamp | date:'shortTime' }}</div>
+        </div>
+    </div>
+  </div>
+
+  <div class="chat-input-container">
+    <input
+      type="text"
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+      [placeholder]="isBotLoading ? 'Bot is thinking...' : 'Type a message...'"
+      class="chat-input"
+    />
+
+    <button
+      (click)="sendMessage()"
+      [disabled]="isBotLoading"
+      class="send-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>

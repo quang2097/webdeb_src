@@ -1,0 +1,17 @@
+<div class="auth-container">
+  <h2>Đăng Nhập</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="Nhập email của bạn" />
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="Nhập mật khẩu" />
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid">Đăng Nhập</button>
+    <nav class="nav-links">
+      <a routerLink="/auth/signup/register">Chưa có tài khoản? Đăng ký ngay</a>
+    </nav>
+  </form>
+</div>
