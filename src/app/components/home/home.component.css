@@ -1,0 +1,466 @@
+/* ==========================================
+   1. CORE LAYOUT & CONTAINERS - BRIGHT THEME
+   ========================================== */
+.novel-container {
+  /* Switched to light background and dark text */
+  background-color: #f9f9f9;
+  color: #333333;
+  padding: 24px;
+  min-height: 100vh;
+  font-family: 'Roboto Condensed', sans-serif, system-ui;
+}
+
+.content-header h2 {
+  /* Text color changed to dark, kept orange accent */
+  color: #111111;
+  font-size: 1.6rem;
+  border-bottom: 2px solid #ff9800;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-layout-wrapper {
+  display: flex;
+  gap: 24px;
+  margin-top: 0;
+  align-items: flex-start;
+}
+
+.left-content-area {
+  flex: 1;
+  min-width: 0;
+}
+
+.right-sidebar-area {
+  flex-shrink: 0;
+  position: sticky;
+  top: 20px;
+  z-index: 10; /* Ensures chat stays above cards when scrolling */
+}
+
+/* ==========================================
+   2. FILTER & DROPDOWN CONTROLS ROW
+   ========================================== */
+.filter-label {
+  /* Darkened label color */
+  color: #555555;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.filter-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.dropdown-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 0;
+}
+
+.dropdown-btn {
+  /* Kept white background, works well in light theme */
+  width: 100%;
+  padding: 10px 14px;
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-family: inherit;
+  height: 40px;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  /* Switched to white background with light border and shadow */
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  z-index: 100;
+  max-height: 260px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 6px 0;
+}
+
+.dropdown-item {
+  padding: 8px 14px;
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  /* Lighter hover background */
+  background-color: #f1f1f1;
+}
+
+.dropdown-item label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: normal;
+  /* Dark text color */
+  color: #333333;
+}
+
+.dropdown-item input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: #ff9800;
+}
+
+.btn-submit {
+  /* Kept orange, adjusted hover for bright background */
+  background-color: #ff9800;
+  color: #ffffff; /* White text on orange */
+  border: none;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.btn-submit:hover {
+  background-color: #e65100;
+}
+
+/* ==========================================
+   3. SELECTION TAG PILLS
+   ========================================== */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0 16px 0;
+}
+
+.tag {
+  /* Light gray background, dark text, subtle border */
+  background-color: #eeeeee;
+  color: #333333;
+  border: 1px solid #dddddd;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.tag:hover {
+  border-color: #ff9800;
+  background-color: #e0e0e0;
+}
+
+.remove-btn {
+  cursor: pointer;
+  font-size: 13px;
+  color: #888888;
+  font-weight: bold;
+  padding-left: 2px;
+  transition: color 0.15s ease;
+  line-height: 1;
+}
+
+.remove-btn:hover {
+  color: #ff4d4d;
+}
+
+/* ==========================================
+   4. NOVEL CARDS GRID (FIXED COHESION)
+   ========================================== */
+.novel-grid {
+  display: grid;
+  /* Sửa 1fr thành minmax(0, 1fr) để ÉP BUỘC 3 cột luôn bằng nhau tuyệt đối */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.novel-card {
+  /* Bổ sung thêm dòng min-width: 0 này để ngăn thẻ tự phình to */
+  min-width: 0;
+
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  padding: 12px;
+  gap: 14px;
+  cursor: pointer;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.novel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #ff9800;
+}
+
+.card-pic img {
+  width: 85px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 4px;
+  /* Adjusted shadow for light background */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: block;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.novel-title {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  /* Dark text */
+  color: #111111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.novel-card:hover .novel-title {
+  color: #ff9800;
+}
+
+.metadata-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* Phục hồi 2 dòng này */
+  width: 100%;
+  min-width: 0;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #666666;
+  /* Phục hồi 2 dòng này */
+  max-width: 100%;
+  min-width: 0;
+}
+
+.meta-icon {
+  font-size: 0.9rem;
+  color: #ff9800; /* Kept gold accent */
+  width: 16px;
+  text-align: center;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   5. PAGINATION & UTILITIES
+   ========================================== */
+.pagination-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 40px;
+  padding-top: 20px;
+  /* Light border separator */
+  border-top: 1px solid #e0e0e0;
+}
+
+.pag-btn {
+  /* Lighter buttons with dark text */
+  background-color: #f0f0f0;
+  color: #333333;
+  border: 1px solid #cccccc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pag-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.pag-btn:disabled {
+  background-color: #f5f5f5;
+  color: #b0b0b0;
+  border-color: #dddddd;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-size: 0.95rem;
+  color: #666666;
+}
+
+.go-to-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666666;
+}
+
+.page-input {
+  /* White background, dark text, light border */
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  color: #333333;
+  padding: 6px;
+  width: 60px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.go-btn {
+  /* Lighter 'go' button */
+  background: #f0f0f0;
+  color: #333333;
+  border: 1px solid #cccccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.go-btn:hover {
+  background: #e0e0e0;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px;
+  color: #777777;
+}
+
+/* Light Dropdown Scrollbar track customizations */
+.dropdown-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0 4px 4px 0;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+  border: 1px solid #f1f1f1;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: #ff9800; /* Kept orange hover */
+}
+
+/* ==========================================
+   6. OPTIMIZED RESPONSIVE BREAKPOINTS
+   ========================================== */
+
+/* Medium Screens */
+@media (max-width: 1300px) {
+  .novel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet & Large Mobile Screens */
+@media (max-width: 880px) {
+  .main-layout-wrapper {
+    flex-direction: column;
+  }
+
+  .novel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .right-sidebar-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    position: static;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 600px) {
+  .novel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dropdown-container {
+    max-width: 100%;
+  }
+}
+
+/* ==========================================
+   SCROLLABLE TAGS (ẨN THANH CUỘN & CHỐNG BÔI ĐEN)
+   ========================================== */
+.tags-scroll-wrapper {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  color: #666666;
+  font-size: 0.85rem;
+
+  /* --- THÊM 4 DÒNG NÀY ĐỂ CHỐNG TÔ XANH/BÔI ĐEN --- */
+  user-select: none;
+  -webkit-user-select: none; /* Dành cho Safari/Chrome */
+  -moz-user-select: none;    /* Dành cho Firefox */
+  -ms-user-select: none;     /* Dành cho IE/Edge */
+
+  /* Ẩn thanh cuộn trên Firefox và IE/Edge cũ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Ẩn thanh cuộn trên Chrome, Safari, Edge mới */
+.tags-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}

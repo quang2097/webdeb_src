@@ -1,0 +1,27 @@
+<div class="auth-container">
+  <h2>{{ type === 'register' ? 'Đăng Ký' : 'Cập nhật thông tin' }}</h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Username</label>
+      <input type="text" formControlName="user_name" placeholder="Nhập tên đăng nhập của bạn"/>
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" formControlName="user_email" placeholder="Nhập email của bạn" />
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" formControlName="password"
+             [placeholder]="type === 'register' ? 'Nhập mật khẩu' : 'Nhập mật khẩu mới (nếu muốn đổi)'" />
+    </div>
+
+    <button type="submit" [disabled]="userForm.invalid">
+      {{ type === 'register' ? 'Đăng Ký' : 'Cập Nhật' }}
+    </button>
+
+    <nav class="nav-links" *ngIf="type === 'register'">
+      <a routerLink="/auth/login" routerLinkActive="active-link">Đã có tài khoản?</a>
+    </nav>
+  </form>
+</div>

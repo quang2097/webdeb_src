@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="novel-container">
+  <h2 class="page-title"><span class="icon-heading">📖</span> Thông tin truyện</h2>
+
+  <div *ngIf="errorMessage" class="error-alert">
+    {{ errorMessage }}
+  </div>
+
+  <div class="main-layout-wrapper">
+
+    <div class="left-content-area">
+      <div *ngIf="novelData && !isLoading" class="results-card">
+        <div class="header">
+          <img *ngIf="novelData.novel_coverurl" src="{{apiUrl}}storage/view/{{novelData.novel_coverurl}}" alt="Cover" class="cover-image" />
+          <div class="title-info">
+            <h3>{{ novelData.novel_title || 'Untitled Novel' }}</h3>
+            <p class="author">Bởi: {{ novelData.novel_author || 'Unknown' }}</p>
+          </div>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item"><strong>Series:</strong> {{ novelData.novel_series }}</div>
+          <div class="detail-item"><strong>Lượt xem:</strong> {{ novelData.novel_views }}</div>
+          <div class="detail-item"><strong>Lượt tải:</strong> {{ novelData.novel_downloads }}</div>
+          <div class="detail-item"><strong>Riêng tư:</strong> {{ novelData.novel_isprivate ? 'Có' : 'Không' }}</div>
+          <div class="detail-item"><strong>Cập nhật:</strong> {{ novelData.novel_updatedat | date:'dd/MM/yyyy' }}</div>
+          <div class="detail-item"><strong>Thể loại:</strong> {{getFormattedTags()}}</div>
+        </div>
+
+        <p class="description"><strong>Mô tả:</strong><br/> {{ novelData.novel_description }}</p>
+
+        <div class="document-card" *ngIf="novelData.document">
+          <h4>📄 Tệp đính kèm</h4>
+          <p><strong>Tên file:</strong> {{ novelData.document.doc_title }}</p>
+          <p><strong>Trạng thái:</strong> {{ novelData.document.doc_status }}</p>
+          <p *ngIf="novelData.document.doc_error" class="error-text"><strong>Chi tiết lỗi:</strong> {{ novelData.document.doc_error }}</p>
+
+          <div class="links">
+            <a class="btn-action" routerLink="/home/novel/view/{{novelData.document.doc_fileurl}}/{{novelId}}">Đọc File</a>
+            <a class="btn-action secondary" routerLink="/home/novel/view/{{novelData.document.doc_markdownurl}}/{{novelId}}">Xem Markdown</a>
+            <a class="btn-action secondary" href="{{apiUrl}}storage/download/{{novelData.document.doc_fileurl}}/{{novelId}}">Tải PDF</a>
+
+            <button class="btn-toggle-report" (click)="reportForm = !reportForm">
+              {{ reportForm ? 'Hủy báo cáo' : 'Báo cáo lỗi' }}
+            </button>
+          </div>
+
+          <div class="report-wrapper" *ngIf="reportForm">
+            <app-report-form [novelId]="novelId"></app-report-form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-sidebar-area" *ngIf="novelData && !isLoading">
+      <app-chat-box
+        type="novel"
+        [novelTitle]="novelData.novel_title"
+        [novelId]="novelId">
+      </app-chat-box>
+    </div>
+
+  </div> </div>

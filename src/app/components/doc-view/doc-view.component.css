@@ -1,0 +1,152 @@
+/* Container for the toolbar floating at the top center */
+
+/* Force the document to be clickable even through the PDF viewer */
+
+/* ==========================================
+   PDF VIEW LAYOUT
+   ========================================== */
+.secure-reader-wrapper {
+  position: relative;
+  /* Giả sử header của bạn cao khoảng 80px.
+     Nếu header cao hơn/thấp hơn, bạn thay đổi số 80px này cho phù hợp nhé */
+  height: calc(100vh - 80px);
+  width: 100%;
+  overflow: hidden; /* Ẩn thanh cuộn thừa của body trình duyệt */
+  background-color: #323639; /* Đưa màu nền ra đây */
+}
+
+.pdf-viewer-wrapper {
+  width: 100%;
+  height: 100%; /* Lấp đầy phần không gian đã trừ đi header */
+  display: block;
+}
+
+/* Các CSS cũ của bạn giữ nguyên bên dưới... */
+
+.custom-toolbar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-toolbar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10; /* Ensures it stays on top of the PDF */
+
+  display: flex;
+  align-items: center;
+  background-color: #2b2b2b; /* Matches your screenshot */
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* The Plus/Minus Buttons */
+.zoom-btn {
+  background: transparent;
+  border: none;
+  color: #9aa0a6;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.zoom-btn:hover {
+  background-color: #3c4043;
+  color: #ffffff;
+}
+
+/* The Percentage Text */
+.zoom-text {
+  color: #e8eaed;
+  font-family: sans-serif;
+  font-size: 14px;
+  min-width: 45px;
+  text-align: center;
+  user-select: none; /* Prevents text highlighting when clicking fast */
+}
+
+.zoom-input {
+  background: transparent;
+  border: none;
+  color: #e8eaed;
+  font-family: sans-serif;
+  font-size: 14px;
+  width: 40px; /* Adjusted width for typing */
+  text-align: center;
+  outline: none;
+  margin: 0 4px;
+}
+
+/* Removes the little spin arrows that appear in number inputs */
+.zoom-input::-webkit-outer-spin-button,
+.zoom-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ==========================================
+   MARKDOWN VIEW - BRIGHT THEME (LOCAL STYLES)
+   ========================================== */
+
+.markdown-page-container {
+  background-color: #f9f9f9; /* Nền xám nhạt đồng bộ với trang chủ */
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center; /* Căn giữa trang đọc */
+  font-family: 'Roboto Condensed', sans-serif, system-ui;
+}
+
+.markdown-render-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 48px;
+  max-width: 900px; /* Giới hạn độ rộng để mắt không phải đảo quá xa khi đọc */
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  color: #333333;
+  line-height: 1.8; /* Khoảng cách dòng thoáng hơn */
+  font-size: 1.15rem; /* Chữ to và dễ đọc hơn */
+}
+
+/* --- Container chứa hình ảnh bên ngoài --- */
+.secondary-images-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  border-bottom: 2px dashed #eeeeee;
+  padding-bottom: 32px;
+}
+
+.markdown-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: block;
+}
+
+/* Responsive khi đọc trên điện thoại */
+@media (max-width: 768px) {
+  .markdown-page-container {
+    padding: 16px 12px;
+  }
+
+  .markdown-render-card {
+    padding: 24px 20px;
+    font-size: 1.05rem;
+  }
+}

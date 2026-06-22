@@ -1,0 +1,37 @@
+<div class="report-box">
+  <div class="report-header">
+    <h4><span class="icon">🚩</span> Report an Issue</h4>
+  </div>
+
+  <form [formGroup]="reportForm" (ngSubmit)="submitReport()">
+    <div class="form-group">
+      <textarea
+        id="reason"
+        formControlName="reason"
+        rows="4"
+        placeholder="Describe the problem (e.g., missing chapters, formatting errors, inappropriate content...)"
+        class="report-textarea"
+      ></textarea>
+
+      <small
+        class="error-text"
+        *ngIf="reportForm.get('reason')?.touched && reportForm.get('reason')?.invalid">
+        * Please provide a reason (at least 10 characters).
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="reportForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Sending...' : 'Submit Report' }}
+      </button>
+    </div>
+  </form>
+
+  <div class="message-container">
+    <p *ngIf="successMessage" class="success-text">✅ {{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error-text">❌ {{ errorMessage }}</p>
+  </div>
+</div>

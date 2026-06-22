@@ -1,0 +1,117 @@
+/* ==========================================
+   REPORT FORM STYLES
+   ========================================== */
+.report-box {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #ef5350; /* Viền đỏ tạo điểm nhấn cảnh báo */
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 24px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-family: 'Roboto Condensed', sans-serif, system-ui;
+  box-sizing: border-box;
+}
+
+.report-header h4 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #333333;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+/* ==========================================
+   TEXTAREA STYLING
+   ========================================== */
+.report-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #333333;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.report-textarea::placeholder {
+  color: #aaaaaa;
+}
+
+.report-textarea:focus {
+  outline: none;
+  border-color: #ef5350;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.15); /* Đổi shadow focus sang màu đỏ nhạt */
+}
+
+/* ==========================================
+   BUTTON & ACTIONS
+   ========================================== */
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Đẩy nút bấm sang góc phải */
+}
+
+.btn-submit {
+  background-color: #ef5350;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: #d32f2f;
+  transform: translateY(-1px); /* Hiệu ứng nảy nhẹ khi hover */
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-submit:disabled {
+  background-color: #ffcdd2;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   MESSAGES
+   ========================================== */
+.message-container {
+  margin-top: 12px;
+}
+
+.error-text {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 6px;
+}
+
+.success-text {
+  color: #2e7d32;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 16px;
+  background-color: #e8f5e9;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #c8e6c9;
+}

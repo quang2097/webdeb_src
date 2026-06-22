@@ -1,0 +1,102 @@
+<header class="app-header">
+  <div class="logo" routerLink="/">
+    <h2>FILE EXPLORER</h2>
+  </div>
+
+  <div class="search-container">
+    <div class="input-wrapper">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Tìm kiếm..."
+        [(ngModel)]="searchQuery"
+        (keyup)="onSearchInput()"
+        (focus)="onSearchFocus()"
+        (blur)="onSearchBlur()"
+        (keyup.enter)="onSearch()"
+      >
+      <button class="search-btn" (click)="onSearch()" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="search-dropdown" *ngIf="isSearchDropdownOpen">
+      <ul *ngIf="searchResults.length > 0; else noResults">
+        <li *ngFor="let result of searchResults" (mousedown)="selectSearchResult(result)">
+          {{ result.novel_title }}
+        </li>
+      </ul>
+
+      <ng-template #noResults>
+        <div class="no-results" *ngIf="searchQuery">Không tìm thấy kết quả.</div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="user-actions">
+    <button *ngIf="!isLoggedIn" routerLink="/auth/login" class="btn-login">Login</button>
+
+    <div class="logged-in-group" *ngIf="isLoggedIn">
+
+      <div class="notification-container">
+        <div class="notification-icon" (click)="toggleNotification()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+
+        <div class="dropdown-menu notification-menu" *ngIf="isNotificationOpen">
+          <div class="dropdown-header">Thông báo mới</div>
+          <hr>
+          <div class="notification-list">
+
+            <li *ngFor="let docCompleted of listDocCompleted" class="notification-item">
+              <div routerLink="/home/upload/update/{{docCompleted.document_id}}" class="clickable-item">
+                Hãy hoàn thiện thông tin cho file:
+                <span class="text-truncate id-text">{{docCompleted.document_id}}</span>
+              </div>
+            </li>
+
+            <li *ngFor="let docFailed of listDocFailed" class="notification-item">
+              <div class="clickable-item text-danger">
+                File bị lỗi:
+                <span class="text-truncate id-text">{{docFailed.document_id}}</span>
+              </div>
+            </li>
+
+            <li *ngFor="let docProcessing of listDocProcessing" class="notification-item processing-item">
+              <div class="processing-info">
+                <span class="info-title">File đang tải lên:</span>
+                <span class="text-truncate id-text text-muted">{{docProcessing.document_id}}</span>
+                <span class="status-text warning-text">{{docProcessing.remainingTimeStr}}</span>
+              </div>
+
+              <div *ngIf="docProcessing.loadBar" class="upload-progress-container">
+                <div [style.width.%]="docProcessing.progressPercent" class="upload-progress-fill"></div>
+              </div>
+            </li>
+
+          </div>
+          <hr>
+          <a class="dropdown-item text-center text-primary" routerLink="/notifications">Xem tất cả</a>
+        </div>
+      </div>
+
+      <div class="avatar-container">
+        <div class="avatar" (click)="toggleDropdown()">{{username.charAt(0) | uppercase }}</div>
+        <div class="dropdown-menu" *ngIf="isUserDropdownOpen">
+          <a routerLink="/home/profile">Hồ sơ</a>
+          <a routerLink="/home/upload/user/documents">Danh sách truyện</a>
+          <a routerLink="/home/upload/start" routerLinkActive="active-link">Đăng tải</a>
+          <a routerLink="/admin" routerLinkActive="active-link" *ngIf="isAdmin">Danh sách người dùng</a>
+          <hr>
+          <button (click)="logout()" class="dropdown-item text-danger">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

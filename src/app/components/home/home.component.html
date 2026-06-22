@@ -1,0 +1,123 @@
+<app-header></app-header>
+
+<div class="novel-container">
+  <div class="content-header">
+    <h2><span class="icon-heading">📋</span> Novel List</h2>
+  </div>
+
+  <div class="main-layout-wrapper">
+
+    <div class="left-content-area">
+
+      <div class="form-group">
+        <label class="filter-label">Filter by Tags</label>
+
+        <div class="filter-controls-row">
+          <div class="dropdown-container">
+            <button (click)="toggleDropdown()" class="dropdown-btn">
+              Select Genres ({{ selectedTags.length }})
+              <span class="arrow" [class.open]="isDropdownOpen">▼</span>
+            </button>
+
+            <div class="dropdown-list" *ngIf="isDropdownOpen">
+              <div *ngFor="let item of listTag" class="dropdown-item">
+                <label>
+                  <input
+                    type="checkbox"
+                    [checked]="item.checked"
+                    (change)="onCheckboxChange(item, $event)"
+                  >
+                  {{ item.tag_name }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-submit" (click)="onSearchClick()">
+            Search Novels
+          </button>
+        </div>
+
+        <div class="tags-container">
+          <span class="tag" *ngFor="let item of selectedTagsName">
+            {{ item }}
+            <span class="remove-btn" (click)="removeTag(item)">✕</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="novel-grid" *ngIf="novels.length > 0; else loading">
+        <div
+          class="novel-card"
+          *ngFor="let novel of novels"
+          (click)="goToNovelDetail(novel.novel_id)">
+
+          <div class="card-pic">
+            <img [src]="api_url + 'storage/view/' + novel.novel_coverurl" alt="{{ novel.novel_title }} Cover">
+          </div>
+
+          <div class="card-info">
+            <h3 class="novel-title" [title]="novel.novel_title">{{ novel.novel_title }}</h3>
+            <div class="metadata-list">
+              <div class="meta-item">
+                <span class="meta-icon">🌐</span>
+                <div class="tags-scroll-wrapper"
+                     #tagsContainer
+                     (mousedown)="onMouseDown($event, tagsContainer)"
+                     (mouseleave)="onMouseLeave()"
+                     (mousemove)="onMouseMove($event, tagsContainer)"
+                     (click)="$event.stopPropagation()">
+                  <ng-container *ngFor="let tag of novel.tags; let last = last">
+                    {{ tag.tag_name }}{{ !last ? ', ' : '' }}
+                  </ng-container>
+                </div>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon">🔍</span>
+                <span class="meta-text truncate">{{ novel.novel_views + " views" || '' }}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon">⬇️</span>
+                <span class="meta-text truncate">{{ novel.novel_downloads + " downloads" || '' }}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="pagination-container" *ngIf="novels.length > 0">
+        <button
+          class="pag-btn"
+          (click)="fetchNovels(currentPage - 1)"
+          [disabled]="currentPage === 1">
+          ‹ Previous
+        </button>
+        <span class="page-indicator">Page <strong>{{ currentPage }}</strong> of {{ totalPages }}</span>
+        <button
+          class="pag-btn"
+          (click)="fetchNovels(currentPage + 1)"
+          [disabled]="currentPage === totalPages">
+          Next ›
+        </button>
+        <div class="go-to-bar">
+          <label for="pageInput">Đi đến trang: </label>
+          <input type="number" id="pageInput" [(ngModel)]="jumpPage" min="1" [max]="totalPages" (keyup.enter)="goToSpecificPage()" class="page-input">
+          <button (click)="goToSpecificPage()" class="go-btn">Go</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="right-sidebar-area">
+      <app-chat-box type="search"></app-chat-box>
+    </div>
+
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-state">
+      <p>Loading novels layout...</p>
+    </div>
+  </ng-template>
+</div>

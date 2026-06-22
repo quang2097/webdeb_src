@@ -1,0 +1,130 @@
+<app-header></app-header>
+
+<div class="my-doc-container">
+  <div class="content-header">
+    <h2><span class="icon-heading">📁</span> User Documents</h2>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-message">
+    Loading docs...
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+    <table>
+      <thead>
+      <tr>
+        <th>NOVEL_ID</th>
+        <th>DOCUMENT_ID</th>
+        <th>DOC_TITLE</th>
+        <th>NOVEL_TITLE</th>
+        <th>NOVEL_AUTHOR</th>
+        <th>PRIVATE</th>
+        <th>STATUS</th>
+        <th>MARKDOWN</th>
+        <th>ACTION</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let doc of documents">
+        <td class="id-column">{{ doc.novel_id }}</td>
+        <td class="id-column">{{ doc.document_id }}</td>
+        <td><strong>{{ doc.doc_title }}</strong></td>
+        <td>{{ doc.novel_title }}</td>
+        <td>{{ doc.novel_author }}</td>
+        <td>
+          <span class="badge" [ngClass]="doc.doc_isprivate ? 'badge-private' : 'badge-public'">
+            {{ doc.doc_isprivate ? 'Private' : 'Public' }}
+          </span>
+        </td>
+        <td>
+          <span class="status-badge" [ngClass]="doc.doc_status === 'completed' ? 'status-active' : 'status-pending'">
+            {{ doc.doc_status }}
+          </span>
+        </td>
+
+        <td>
+          <a *ngIf="doc.doc_status === 'completed'"
+             routerLink="/home/novel/view/{{doc.doc_markdownurl}}/{{doc.novel_id}}"
+             class="action-btn btn-view">View</a>
+        </td>
+
+        <td class="actions-cell">
+          <ng-container *ngIf="doc.doc_status === 'completed'">
+            <a routerLink="/home/upload/update/{{doc.document_id}}/{{doc.novelId}}" class="action-btn btn-update">Thay Đổi</a>
+            <button class="action-btn btn-delete" (click)="deleteDoc(doc.novel_id)">Delete</button>
+          </ng-container>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-container" *ngIf="documents.length > 0">
+    <button class="pag-btn" (click)="fetchDocuments(novelCurrentPage - 1)" [disabled]="novelCurrentPage === 1">‹ Previous</button>
+    <span class="page-indicator">Page <strong>{{ novelCurrentPage }}</strong> of {{ novelTotalPages }}</span>
+    <button class="pag-btn" (click)="fetchDocuments(novelCurrentPage + 1)" [disabled]="novelCurrentPage === novelTotalPages">Next ›</button>
+    <div class="go-to-bar">
+      <label for="docPageInput">Đi đến trang: </label>
+      <input type="number" id="docPageInput" [(ngModel)]="novelJumpPage" min="1" [max]="novelTotalPages" (keyup.enter)="goToSpecificNovelPage()" class="page-input">
+      <button (click)="goToSpecificNovelPage()" class="go-btn">Go</button>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && !errorMessage && documents.length === 0">
+    No documents found in the database.
+  </div>
+
+  <div class="content-header mt-40">
+    <h2><span class="icon-heading">⚠️</span> Reports</h2>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+    <table>
+      <thead>
+      <tr>
+        <th>NOVEL_ID</th>
+        <th>OWNER_ID</th>
+        <th>REPORT_ID</th>
+        <th>STATUS</th>
+        <th>DATE</th>
+        <th>TYPE</th>
+        <th>REASON</th>
+        <th>COMMENT</th>
+        <th>ACTION</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let report of reports">
+        <td class="id-column">{{ report.report_novel_id }}</td>
+        <td class="id-column">{{ report.report_user_id }}</td>
+        <td class="id-column">{{ report.report_id }}</td>
+        <td>
+          <span class="badge badge-warning">{{ report.report_status }}</span>
+        </td>
+        <td>{{ report.report_createdat | date:'dd/MM/yyyy' }}</td>
+        <td>{{ report.report_type }}</td>
+        <td>{{ report.report_reason }}</td>
+        <td class="truncate-text" [title]="report.report_comment">{{ report.report_comment }}</td>
+        <td class="actions-cell">
+          <button class="action-btn btn-delete" (click)="deleteReport(report.report_id)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-container" *ngIf="reports.length > 0">
+    <button class="pag-btn" (click)="fetchReports(reportCurrentPage - 1)" [disabled]="reportCurrentPage === 1">‹ Previous</button>
+    <span class="page-indicator">Page <strong>{{ reportCurrentPage }}</strong> of {{ reportTotalPages }}</span>
+    <button class="pag-btn" (click)="fetchReports(reportCurrentPage + 1)" [disabled]="reportCurrentPage === reportTotalPages">Next ›</button>
+    <div class="go-to-bar">
+      <label for="reportPageInput">Đi đến trang: </label>
+      <input type="number" id="reportPageInput" [(ngModel)]="reportJumpPage" min="1" [max]="reportTotalPages" (keyup.enter)="goToSpecificReportPage()" class="page-input">
+      <button (click)="goToSpecificReportPage()" class="go-btn">Go</button>
+    </div>
+  </div>
+</div>

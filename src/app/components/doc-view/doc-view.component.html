@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div #pdfContainer class="secure-reader-wrapper noselect"
+     *ngIf="typeFromUrl==='pdf'"
+     (contextmenu)="$event.preventDefault()">
+
+  <div #toolbar class="custom-toolbar" [class.visible]="showToolbar">
+    <button (click)="zoomOut()" class="zoom-btn">&minus;</button>
+
+    <input
+      type="number"
+      class="zoom-input"
+      [value]="zoomPercentage"
+      (change)="onManualZoom($event)"
+    >
+    <span class="zoom-text">%</span>
+
+    <button (click)="zoomIn()" class="zoom-btn">+</button>
+  </div>
+
+  <pdf-viewer
+    src="{{apiUrl}}storage/view/local_storage/{{typeFromUrl}}/{{fileUrlFromUrl}}/{{idFromUrl}}"
+    [render-text]="false"
+    [original-size]="false"
+    [autoresize]="true"
+    [zoom]="zoomLevel"
+    class="pdf-viewer-wrapper">
+  </pdf-viewer>
+</div>
+
+<div class="markdown-page-container" *ngIf="typeFromUrl === 'markdown_reveal' || typeFromUrl === 'markdown'">
+
+  <div class="markdown-render-card">
+
+    <div class="secondary-images-container" *ngIf="imageUrls.length > 0">
+      <img
+        *ngFor="let url of imageUrls"
+        [src]="url"
+        alt="Ảnh minh họa"
+        class="markdown-img"
+      />
+    </div>
+
+    <div class="markdown-content">
+      <markdown [disableSanitizer]="true" [src]="apiUrl + 'storage/view/local_storage/' + typeFromUrl + '/' + fileUrlFromUrl + '/' + idFromUrl"></markdown>
+    </div>
+
+  </div>
+
+</div>
