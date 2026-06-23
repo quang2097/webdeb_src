@@ -20,6 +20,8 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
 import {MarkdownModule} from "ngx-markdown";
 import { MyDocComponent } from './components/my-doc/my-doc.component';
 import { ReportFormComponent } from './components/report-form/report-form.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +38,8 @@ import { ReportFormComponent } from './components/report-form/report-form.compon
     DocViewComponent,
     MyDocComponent,
     ReportFormComponent,
+    ResetPasswordComponent,
+    ActivateAccountComponent,
 
   ],
   imports: [

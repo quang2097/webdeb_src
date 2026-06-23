@@ -18,13 +18,11 @@ export class UploadUpdateComponent implements OnInit {
 
   needs_image_upload: string = ''
 
-  // Required fields
   existingCoverUrl: string = '';
   selectedCover: File | null = null;
   novelTitle: string = '';
   novelAuthor: string = '';
 
-  // Optional fields
   novelDescription: string = '';
   novelSeries: string = '';
   isPrivate: boolean = false;
@@ -49,7 +47,6 @@ export class UploadUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 3. Store the result in a variable first to make TypeScript happy
     const idFromUrl :any = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (idFromUrl) {
@@ -92,18 +89,14 @@ export class UploadUpdateComponent implements OnInit {
       next: (data: any) => {
         this.listTag = data;
 
-        // Gọi hàm đồng bộ UI
         this.syncTagsUI();
       }
     });
   }
 
-  // THÊM HÀM MỚI NÀY VÀO DƯỚI CÙNG HOẶC GẦN 2 HÀM TRÊN
   syncTagsUI() {
-    // Duyệt qua tất cả các tag hiện có trong dropdown
     if (this.listTag && this.listTag.length > 0) {
       this.listTag.forEach(tag => {
-        // Nếu tag_id nằm trong danh sách đã chọn -> đánh dấu checked = true
         tag.checked = this.selectedTags.includes(tag.tag_id);
       });
     }
@@ -121,19 +114,14 @@ export class UploadUpdateComponent implements OnInit {
   }
 
   onCheckboxChange(tag: any, event: Event) {
-    // Lấy trạng thái check từ DOM
     const isChecked = (event.target as HTMLInputElement).checked;
 
-    // Cập nhật trạng thái cho object
     tag.checked = isChecked;
 
     if (isChecked) {
-      // Nếu check: Thêm ID và Tên vào 2 mảng
       this.selectedTags.push(tag.tag_id);
       this.selectedTagsName.push(tag.tag_name);
     } else {
-      // NẾU BỎ CHECK: Tìm index của ID trong mảng và xóa
-      // (Sửa lại điều kiện tìm kiếm cho đúng với tag_id)
       const index = this.selectedTags.findIndex(id => id === tag.tag_id);
 
       if (index > -1) {
@@ -159,24 +147,20 @@ export class UploadUpdateComponent implements OnInit {
   }
 
   removeTag(tagNameToRemove: string) {
-    // 1. Tìm tag trong danh sách gốc (listTag) dựa vào tên và bỏ check
     const foundItem = this.listTag.find(item => item.tag_name === tagNameToRemove);
     if (foundItem) {
       foundItem.checked = false;
     }
 
-    // 2. Tìm vị trí (index) của tên tag này trong mảng selectedTagsName
     const index = this.selectedTagsName.indexOf(tagNameToRemove);
 
-    // 3. Nếu tìm thấy, xóa phần tử ở vị trí đó trong cả 2 mảng
     if (index > -1) {
-      this.selectedTags.splice(index, 1);      // Xóa ID gửi về backend
-      this.selectedTagsName.splice(index, 1);  // Xóa Tên hiển thị trên UI
+      this.selectedTags.splice(index, 1);
+      this.selectedTagsName.splice(index, 1);
     }
   }
 
   onFileSelected(e: Event) {
-    // Sử dụng biến 'e' thay vì 'event'
     const inputElement = e.target as HTMLInputElement;
 
     if (inputElement.files && inputElement.files.length > 0) {
@@ -185,16 +169,12 @@ export class UploadUpdateComponent implements OnInit {
     }
   }
 
-  // Thêm hàm xóa ảnh này
   removeCover(e: Event) {
-    // Ngăn không cho sự kiện click lan truyền ra thẻ <label> bên ngoài
     e.preventDefault();
     e.stopPropagation();
 
-    // Xóa biến lưu trữ file
     this.selectedCover = null;
 
-    // Reset lại thẻ input file để người dùng có thể chọn lại chính file đó nếu muốn
     const fileInput = document.getElementById('coverUpload') as HTMLInputElement;
     if (fileInput) {
       fileInput.value = '';
@@ -209,7 +189,6 @@ export class UploadUpdateComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    // 1. Cập nhật thông tin chính (formData)
     const formData = new FormData();
     if (this.selectedCover instanceof File) {
       formData.append('cover_file', this.selectedCover);
@@ -245,7 +224,6 @@ export class UploadUpdateComponent implements OnInit {
       });
     }
 
-    // 2. Cập nhật ảnh phụ (chỉ gọi nếu có ảnh mới được chọn)
     if (this.selectedImg instanceof File) {
       const additionalImgForm = new FormData();
       additionalImgForm.append('img_file', this.selectedImg);
@@ -253,9 +231,7 @@ export class UploadUpdateComponent implements OnInit {
       if (this.selectedImg instanceof File) {
         additionalImgForm.append('image_file', this.selectedImg);
 
-        // Chỉ gọi API khi đã chắc chắn có file
         this.uploadService.uploadAdditionalImage(additionalImgForm, this.documentId).subscribe({
-          // ... xử lý kết quả
         });
       } else {
         console.warn("Không có ảnh để upload, bỏ qua bước này.");

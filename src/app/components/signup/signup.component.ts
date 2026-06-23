@@ -10,7 +10,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  userForm!: FormGroup; // Chỉ dùng 1 form duy nhất
+  userForm!: FormGroup;
   type: string | null = '';
 
   constructor(
@@ -24,7 +24,6 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.type = this.activatedRoute.snapshot.paramMap.get('type') || 'register';
 
-    // Xác định validator tùy theo mode
     const isRegister = this.type === 'register';
 
     this.userForm = this.fb.group({
@@ -37,12 +36,13 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     if (this.userForm.invalid) return;
 
-    // === TRƯỜNG HỢP: ĐĂNG KÝ ===
     if (this.type === 'register') {
       this.authService.signup(this.userForm.value).subscribe({
-        next: () => {
-          alert('Đăng ký thành công!');
-          this.router.navigate(['/login']);
+        next: (response:any) => {
+          alert('Kiểm tra email để kích hoa tài khoản');
+          this.router.navigate(['/auth/activate'], {
+            queryParams: { user_id: response.user_id }
+          });
         },
         error: (err) => {
           alert('Lỗi: ' + (err.error?.detail || 'Không thể đăng ký'));
@@ -51,12 +51,10 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    // === TRƯỜNG HỢP: CẬP NHẬT ===
     if (this.type === 'update') {
       const rawValues = this.userForm.value;
       const dataToSend: any = {};
 
-      // Lọc bỏ các trường trống
       Object.keys(rawValues).forEach(key => {
         const value = rawValues[key];
         if (value !== null && value !== undefined && value.toString().trim() !== '') {

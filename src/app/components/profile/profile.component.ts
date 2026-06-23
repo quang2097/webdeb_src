@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 
-// 1. Define the structure based on your Swagger API screenshot
 export interface UserProfile {
   user_id: string;
   user_name: string;
@@ -19,7 +18,6 @@ export class ProfileComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
 
-  // Inject the service that contains your myInfo() method
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {

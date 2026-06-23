@@ -27,13 +27,11 @@ export class LoginComponent {
 
       const formValues = this.loginForm.value;
 
-      // Map dữ liệu chuẩn bị gửi đi
       const requestData = {
-        username: formValues.email,   // Gán email vào trường username
+        username: formValues.email,
         password: formValues.password
       };
 
-      // Gửi requestData vào service
       this.authService.login(requestData).subscribe({
         next: (response) => {
             this.authService.saveToken(response.access_token);

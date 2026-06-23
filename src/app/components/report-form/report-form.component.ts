@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./report-form.component.css']
 })
 export class ReportFormComponent {
-  @Input() novelId: string = ''; // Grabs the ID from the parent component
+  @Input() novelId: string = '';
 
   reportForm: FormGroup;
   isSubmitting: boolean = false;
@@ -18,14 +18,12 @@ export class ReportFormComponent {
   errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private reportService: ReportService) {
-    // Build a simple form with a required reason field (minimum 10 characters)
     this.reportForm = this.fb.group({
       reason: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
   submitReport() {
-    // Stop if the form is empty or too short
     if (this.reportForm.invalid) return;
 
     this.isSubmitting = true;
@@ -40,7 +38,7 @@ export class ReportFormComponent {
     this.reportService.createReport(this.novelId, reasonText).subscribe({
       next: (response) => {
         this.successMessage = 'Your report has been submitted successfully.';
-        this.reportForm.reset(); // Clear the text box
+        this.reportForm.reset();
         this.isSubmitting = false;
       },
       error: (err) => {

@@ -10,13 +10,17 @@ import {AdminComponent} from "./components/admin/admin.component";
 import {NovelPreviewComponent} from "./components/novel-preview/novel-preview.component";
 import {DocViewComponent} from "./components/doc-view/doc-view.component";
 import {MyDocComponent} from "./components/my-doc/my-doc.component";
+import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
+import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
 
 const routes: Routes = [
   {
     path: 'auth',
     children: [
-      { path: 'login', component: LoginComponent },   // Sẽ thành: /auth/login
-      { path: 'signup/:type', component: SignupComponent }  // Sẽ thành: /auth/signup
+      { path: 'login', component: LoginComponent },
+      { path: 'signup/:type', component: SignupComponent }  ,
+      { path: 'reset/password', component: ResetPasswordComponent},
+      { path:'activate', component: ActivateAccountComponent}
     ]
   },
 
