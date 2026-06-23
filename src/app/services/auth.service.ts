@@ -42,6 +42,10 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/verify-token`,{headers : this.getHeader()})
   }
 
+  activateAccount(payload: { user_id: string, otp: string }) {
+    return this.http.put(`${this.apiUrl}/activate/account`, payload);
+  }
+
   // Lưu token vào LocalStorage
   saveToken(token: string) {
     localStorage.setItem('access_token', token);
@@ -60,6 +64,14 @@ export class AuthService {
     return  new HttpHeaders({
       'Authorization': `Bearer ${this.getToken()}`
     });
+  }
+
+  forgotPassword(data: { email: string }) {
+    return this.http.post(`${this.apiUrl}/forgot-password`, data);
+  }
+
+  resetPassword(data: { token: string, new_password: string }) {
+    return this.http.post(`${this.apiUrl}/reset-password`, data);
   }
 
 

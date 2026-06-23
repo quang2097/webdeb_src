@@ -26,7 +26,6 @@ export class AdminComponent implements OnInit {
   fetchUsers(page:number): void {
     this.adminService.getAllUsers(page).subscribe({
       next: (response) => {
-        // Extract the array from the 'users' wrapper key
         this.users = response.users;
         this.isLoading = false;
         this.currentPage = response.page;
@@ -41,26 +40,19 @@ export class AdminComponent implements OnInit {
   }
 
   goToSpecificPage() {
-    // 1. Validation: Make sure they didn't type -5 or page 1000 if it doesn't exist
     if (this.jumpPage >= 1 && this.jumpPage <= this.totalPages) {
       this.fetchUsers(this.jumpPage);
     } else {
       alert(`Vui lòng nhập trang từ 1 đến ${this.totalPages}`);
-      // Reset the input box back to the current safe page
       this.jumpPage = this.currentPage;
     }
   }
 
-  // ... existing code ...
-
   deleteUser(userId: string): void {
-    // 1. Ask for confirmation
     if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
 
-      // 2. Call the service
       this.adminService.deleteUser(userId).subscribe({
         next: () => {
-          // 3. Remove the user from the local array to instantly update the UI
           this.users = this.users.filter(user => user.user_id !== userId);
         },
         error: (err) => {
@@ -72,7 +64,6 @@ export class AdminComponent implements OnInit {
   }
 
   toggleLockStatus(user: User): void {
-    // Determine the opposite of their current status
     const newStatus = !user.user_islocked;
     const actionText = newStatus ? 'lock' : 'unlock';
 
@@ -80,9 +71,8 @@ export class AdminComponent implements OnInit {
       if(user.user_islocked){
         this.adminService.unlockUser(user.user_id).subscribe({
             next: () => {
-              // Update the local user object to instantly swap the button UI
               user.user_islocked = newStatus;
-            },      //   },
+            },
             error: (err) => {
               console.error(`Error trying to ${actionText} user:`, err);
               alert(`Failed to ${actionText} the user. Please check the console.`);
@@ -92,9 +82,9 @@ export class AdminComponent implements OnInit {
       if(!user.user_islocked){
         this.adminService.lockUser(user.user_id).subscribe({
           next: () => {
-            // Update the local user object to instantly swap the button UI
+
             user.user_islocked = newStatus;
-          },      //   },
+          },
           error: (err) => {
             console.error(`Error trying to ${actionText} user:`, err);
             alert(`Failed to ${actionText} the user. Please check the console.`);
@@ -107,7 +97,6 @@ export class AdminComponent implements OnInit {
 
   toggleAdminStatus(user: User): void {
     let newAdminStatus = false;
-    // Determine the opposite of their current status
     if(user.user_role=='admin'){
       newAdminStatus = true;
     }
@@ -118,9 +107,8 @@ export class AdminComponent implements OnInit {
       if(newAdminStatus){
         this.authService.dropAdmin(user.user_id).subscribe({
           next: () => {
-            // Update the local user object to instantly swap the button UI
             user.user_role = newAdminStatus ? 'user' : 'admin';
-          },      //   },
+          },
           error: (err) => {
             console.error(`Error trying to ${actionText} user:`, err);
             alert(`Failed to ${actionText} the user. Please check the console.`);
@@ -130,9 +118,8 @@ export class AdminComponent implements OnInit {
       if(!newAdminStatus){
         this.authService.createAdmin(user.user_id).subscribe({
           next: () => {
-            // Update the local user object to instantly swap the button UI
             user.user_role = newAdminStatus ? 'user' : 'admin';
-          },      //   },
+          },
           error: (err) => {
             console.error(`Error trying to ${actionText} user:`, err);
             alert(`Failed to ${actionText} the user. Please check the console.`);

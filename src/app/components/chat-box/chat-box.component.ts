@@ -37,7 +37,6 @@ export class ChatBoxComponent implements AfterViewChecked, OnInit, OnChanges {
   startMessage: string = '';
   newMessage: string = '';
 
-  // 1. Thêm biến cờ để theo dõi trạng thái load của Bot
   isBotLoading: boolean = false;
 
   chatFormSearch: any;
@@ -95,7 +94,6 @@ export class ChatBoxComponent implements AfterViewChecked, OnInit, OnChanges {
 
     var botResponse = '';
     var data: any = '';
-    // 1. Tạo biến cờ để kiểm soát việc có hiện link hay không
     let novelFound = false;
 
     if (this.type == "search") {
@@ -103,17 +101,15 @@ export class ChatBoxComponent implements AfterViewChecked, OnInit, OnChanges {
         this.chatFormSearch.value.question = userPrompt;
         data = await firstValueFrom(this.chatbotService.aiSearch(this.chatFormSearch.value));
 
-        // Kiểm tra nếu mảng novels trả về có phần tử thì mới tính là tìm thấy
         if (data && data.novels && data.novels.length > 0) {
           this.novelId = data.novels[0].novel_id;
           botResponse = data.extracted_query;
-          novelFound = true; // Bật cờ tìm thấy truyện thành công!
+          novelFound = true;
         } else {
           botResponse = "No novels found matching the AI search query";
           novelFound = false;
         }
       } catch (err: any) {
-        // Nếu sập vào catch (như trường hợp lỗi 404 trong ảnh của ông), khóa cờ lại ngay
         novelFound = false;
         if ((err.error?.detail) == 'undefined') {
           botResponse = "thay apiKey";
@@ -133,7 +129,6 @@ export class ChatBoxComponent implements AfterViewChecked, OnInit, OnChanges {
     }
 
     setTimeout(() => {
-      // 2. Chỉ add linkUrl khi THỰC SỰ tìm thấy truyện (novelFound === true)
       if (this.type == 'search' && novelFound) {
         this.messages.push({
           sender: 'bot',
@@ -143,7 +138,6 @@ export class ChatBoxComponent implements AfterViewChecked, OnInit, OnChanges {
           linkText: "Click here to read it"
         });
       } else {
-        // Trường hợp không tìm thấy truyện hoặc chat với novel thông thường, không hiện link
         this.messages.push({
           sender: 'bot',
           text: botResponse,

@@ -81,7 +81,6 @@ export class MyDocComponent implements OnInit, OnDestroy{
     if(this.isAdmin){
       this.novelService.getAdminDocuments(page).subscribe({
         next: (data:any) => {
-          // Extract the array from the 'users' wrapper key
           this.documents = data.items;
           this.isLoading = false;
           this.novelTotalPages = data.total_pages
@@ -97,7 +96,6 @@ export class MyDocComponent implements OnInit, OnDestroy{
     if(!this.isAdmin){
       this.novelService.getUserDocuments(page).subscribe({
         next: (data:any) => {
-          // Extract the array from the 'users' wrapper key
           this.documents = data.items;
           this.isLoading = false;
           this.novelTotalPages = data.total_pages
@@ -113,23 +111,19 @@ export class MyDocComponent implements OnInit, OnDestroy{
   }
 
   goToSpecificNovelPage() {
-    // 1. Validation: Make sure they didn't type -5 or page 1000 if it doesn't exist
     if (this.novelJumpPage >= 1 && this.novelJumpPage <= this.novelTotalPages) {
       this.fetchDocuments(this.novelJumpPage);
     } else {
       alert(`Vui lòng nhập trang từ 1 đến ${this.novelTotalPages}`);
-      // Reset the input box back to the current safe page
       this.novelJumpPage = this.novelCurrentPage;
     }
   }
 
   goToSpecificReportPage() {
-    // 1. Validation: Make sure they didn't type -5 or page 1000 if it doesn't exist
     if (this.reportJumpPage >= 1 && this.reportJumpPage <= this.reportTotalPages) {
       this.fetchReports(this.reportJumpPage);
     } else {
       alert(`Vui lòng nhập trang từ 1 đến ${this.reportTotalPages}`);
-      // Reset the input box back to the current safe page
       this.reportJumpPage = this.reportCurrentPage;
     }
   }
@@ -137,13 +131,10 @@ export class MyDocComponent implements OnInit, OnDestroy{
 
 
   deleteDoc(novelId: string): void {
-    // 1. Ask for confirmation
     if (confirm('Are you sure you want to delete this document? This action cannot be undone.')) {
 
-      // 2. Call the service
       this.novelService.deleteNodelById(novelId).subscribe({
         next: () => {
-          // 3. Remove the user from the local array to instantly update the UI
           this.documents = this.documents.filter(doc => doc.novel_id !== novelId);
         },
         error: (err) => {
@@ -170,7 +161,6 @@ export class MyDocComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    // Always clean up the subscription when the user leaves the page
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
     }

@@ -27,7 +27,7 @@ export class NovelPreviewComponent implements OnInit {
 
     if (idFromUrl) {
       this.novelId = idFromUrl;
-      console.log("THE URL ID IS:", this.novelId); // <--- ADD THIS
+      console.log("THE URL ID IS:", this.novelId);
       this.fetchNovel();
     }
   }
@@ -53,7 +53,6 @@ export class NovelPreviewComponent implements OnInit {
   }
 
   getFormattedTags(): string {
-    // Check if it exists and is an array
     if (!this.novelData?.tags || !Array.isArray(this.novelData.tags)) {
       console.log(this.novelData?.tags);
       return 'No tags';

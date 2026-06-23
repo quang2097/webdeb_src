@@ -16,8 +16,6 @@ export class UploadComponent {
   errorMessage: string = '';
 
   constructor(private http: HttpClient, private uploadService: UploadService, private router: Router) {}
-
-  // Triggered when the user selects a file via the input
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -38,18 +36,14 @@ export class UploadComponent {
     this.errorMessage = '';
     this.uploadMessage = '';
 
-    // 1. Prepare the form data (Must match the 'pdf_file' key from Swagger)
     const formData = new FormData();
     formData.append('pdf_file', this.selectedFile);
 
-    // 3. Make the POST request to the exact URL from your cURL command
     this.uploadService.uploadStart(formData).subscribe({
       next: (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
-          // Calculate the percentage
           this.uploadProgress = Math.round(100 * event.loaded / event.total);
         } else if (event.type === HttpEventType.Response) {
-          // The upload has completely finished
           this.isUploading = false;
           this.uploadMessage = 'File successfully uploaded to the server!';
           this.router.navigate(['/home']);

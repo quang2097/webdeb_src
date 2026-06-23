@@ -1,0 +1,28 @@
+<div class="auth-container">
+  <h2>Kích Hoạt Tài Khoản</h2>
+
+  <p class="instruction-text">
+    Chúng tôi đã gửi một mã OTP gồm 6 chữ số tới email của bạn. Vui lòng kiểm tra hộp thư (và mục Spam) để lấy mã.
+  </p>
+
+  <form [formGroup]="otpForm" (ngSubmit)="onActivate()">
+    <div>
+      <label>Mã Xác Thực (OTP)</label>
+      <input
+        type="text"
+        formControlName="otp"
+        placeholder="Nhập mã 6 số (VD: 123456)"
+        maxlength="6"
+        autocomplete="off"
+      />
+    </div>
+
+    <button type="submit" [disabled]="otpForm.invalid">
+      Xác Nhận Kích Hoạt
+    </button>
+
+    <nav class="nav-links">
+      <a routerLink="/auth/signup">Quay lại đăng ký</a>
+    </nav>
+  </form>
+</div>
